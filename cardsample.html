@@ -37,14 +37,28 @@
     var texture = textureLoader.load("cards/cards/1.png");
     var mat = new THREE.MeshPhongMaterial();
     mat.map = texture;
-
-
+    
+    //6面分のテクスチャー読み込み
+    var materials = [
+      new THREE.MeshLambertMaterial({map2:THREE.ImageUtils.loadTexture("cards/cards/1.png")}),
+      new THREE.MeshLambertMaterial({map2:THREE.ImageUtils.loadTexture("cards/cards/14.png")}),
+      new THREE.MeshLambertMaterial({map2:THREE.ImageUtils.loadTexture("cards/cards/27.png")}),
+      new THREE.MeshLambertMaterial({map2:THREE.ImageUtils.loadTexture("cards/cards/40.png")}),
+      new THREE.MeshLambertMaterial({map2:THREE.ImageUtils.loadTexture("cards/cards/Thumbs.png")}),
+      new THREE.MeshLambertMaterial({map2:THREE.ImageUtils.loadTexture("cards/cards/c1.png")}),
+     ];
+    var material = new THREE.MeshFaceMaterial(materials); // マテリアルをセット
 
     // 平面を作成
     var geometry = new THREE.PlaneGeometry( 4, 6, 1 );
     var plane = new THREE.Mesh( geometry, mat);
     plane.position.set(0,0,0);
     scene.add( plane );
+    
+    // 箱を作成
+    var geometry2 = new THREE.BoxGeometry(4, 6, 0.1);
+    var box = new THREE.Mesh(geometry, material);
+    scene.add(box);
 
 
     // 平面を作成
