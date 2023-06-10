@@ -60,7 +60,7 @@
         var material = new THREE.MeshFaceMaterial(materials); // マテリアルをセット
 
         // 箱を作成
-        var geometry = new THREE.BoxGeometry(1, 1, 1);
+        var geometry = new THREE.BoxGeometry(1, 2, 1);
         var box = new THREE.Mesh(geometry, material);
         scene.add(box);
 
@@ -73,8 +73,8 @@
           requestAnimationFrame(update);
 
            // 箱を回転させる
-          box.rotation.x += 0.01;
-          box.rotation.y += 0.01;
+          //box.rotation.x += 0.01;
+          //box.rotation.y += 0.01;
 
         }
       }
