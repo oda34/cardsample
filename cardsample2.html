@@ -51,16 +51,16 @@
         var materials = [
           new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/1.png")}),
           new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/14.png")}),
-          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/27.png")}),
-          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/40.png")}),
-          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/Thumbs.png")}),
+          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
+          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
+          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
           new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
         ];
  
         var material = new THREE.MeshFaceMaterial(materials); // マテリアルをセット
 
         // 箱を作成
-        var geometry = new THREE.BoxGeometry(1, 2, 1);
+        var geometry = new THREE.BoxGeometry(1, 2, 0.1);
         var box = new THREE.Mesh(geometry, material);
         scene.add(box);
 
