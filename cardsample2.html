@@ -46,6 +46,9 @@
         scene.add(gridHelper);
         const axisHelper = new THREE.AxisHelper(2); //軸の長さ　X：赤、Y：緑、z：青
         scene.add(axisHelper);
+        
+        //ランダムな番号の生成
+        var i=Math.floor(Math.random() * 52) + 1;
 
         //6面分のテクスチャー読み込み
         var materials = [
@@ -53,7 +56,7 @@
           new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
           new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
           new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
-          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/1.png")}),
+          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/i.png")}),
           new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/c1.png")}),
         ];
  
