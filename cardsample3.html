@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>cardsample3</title> 
+  <title>fusample</title> 
 
   <!-- three.jsを読み込む(ローカル) -->
   <!-- <script src="./three.js"></script> -->
@@ -11,64 +11,60 @@
   <script src="https://unpkg.com/three@0.137.4/examples/js/controls/OrbitControls.js"></script>
 </head>
 <body>
- <script>
-   var init = function() {
-     // 必要な変数を定義
-     var containerCount = 52; // 箱の数
-     var radius = 10; // 円の半径
-     var width=800,
-         height=600;
+ <script>// 必要な変数を定義します
+var containerCount = 52; // 箱の数
+var radius = 10; // 円の半径
+var sceneWidth = window.innerWidth; // ウィンドウの幅
+var sceneHeight = window.innerHeight; // ウィンドウの高さ
 
-     // レンダラーを作成
-     var renderer = new THREE.WebGLRenderer();
-     renderer.setSize(width, height);
-     document.body.appendChild(renderer.domElement);
+// レンダラーを作成します
+var renderer = new THREE.WebGLRenderer();
+renderer.setSize(sceneWidth, sceneHeight);
+document.body.appendChild(renderer.domElement);
 
-      // シーンを作成
-      var scene = new THREE.Scene();
+// シーンを作成します
+var scene = new THREE.Scene();
 
-      // カメラを作成します
-      var camera = new THREE.PerspectiveCamera(90, width / height, 1, 1000);
-      camera.position.z = 30;
+// カメラを作成します
+var camera = new THREE.PerspectiveCamera(75, sceneWidth / sceneHeight, 0.1, 1000);
+camera.position.z = 30;
 
-      const controls = new THREE.OrbitControls(camera, document.body);
-     
-      // オブジェクトを作成します
-      var geometry = new THREE.BoxGeometry(1, 2, 0.001);
-      var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+const controls = new THREE.OrbitControls(camera, document.body);
+// オブジェクトを作成します
+var geometry = new THREE.BoxGeometry(1, 2, 0.001);
+var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 
-      // グループを作成します
-      var group = new THREE.Group();
+// グループを作成します
+var group = new THREE.Group();
 
-      // オブジェクトをグループに追加します
-      for (var i = 0; i < containerCount; i++) {
-        var angle = (i / containerCount) * Math.PI * 2; // 円周上の角度を計算します
+// オブジェクトをグループに追加します
+for (var i = 0; i < containerCount; i++) {
+    var angle = (i / containerCount) * Math.PI * 2; // 円周上の角度を計算します
 
-        var z = Math.cos(angle) * radius; // X座標を計算します
-        var x = Math.sin(angle) * radius; // Y座標を計算します
+    var z = Math.cos(angle) * radius; // X座標を計算します
+    var x = Math.sin(angle) * radius; // Y座標を計算します
 
-        var card = new THREE.Mesh(geometry, material); // オブジェクトを作成します
-        card.position.z = z; // X座標を設定します
-        card.position.x = x; // Y座標を設定します
+    var cube = new THREE.Mesh(geometry, material); // オブジェクトを作成します
+    cube.position.z = z; // X座標を設定します
+    cube.position.x = x; // Y座標を設定します
 
-        group.add(card); // グループにオブジェクトを追加します
-      }
+    group.add(cube); // グループにオブジェクトを追加します
+}
 
-      // グループをシーンに追加します
-      scene.add(group);
+// グループをシーンに追加します
+scene.add(group);
 
-      // アニメーションループを作成します
-      function animate() {
-        requestAnimationFrame(animate);
+// アニメーションループを作成します
+function animate() {
+    requestAnimationFrame(animate);
 
-         // グループを回転させます
-         //group.rotation.x += 0.01;
-         //group.rotation.y += 0.01;
-         group.rotation.y+=0.001;
+    // グループを回転させます
+    //group.rotation.x += 0.01;
+    //group.rotation.y += 0.01;
+    group.rotation.y+=0.001;
 
-         renderer.render(scene, camera);
-      }
-   }
+    renderer.render(scene, camera);
+}
 
 // アニメーションを開始します
 animate();
