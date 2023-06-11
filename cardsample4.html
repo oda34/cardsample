@@ -47,16 +47,10 @@
 
       const controls = new THREE.OrbitControls(camera, renderer.domElement);
       
-      // 平行光源1
-      var directionalLight1 = new THREE.DirectionalLight(0xffffff);
-      directionalLight1.position.set(30, 30, 30);
-      // シーンに追加
-      scene.add(directionalLight1);
-      // 平行光源2
-      var directionalLight2 = new THREE.DirectionalLight(0x888888);
-      directionalLight2.position.set(-30, -30, -30);
-      // シーンに追加
-      scene.add(directionalLight2);
+      //光源の作成
+      var light = new THREE.PointLight(0xffffff);
+      light.position.set(0, 0, 20); //光源の位置を設定
+      scene.add(light);
 
       //カードの作成
       var geometry = new THREE.BoxGeometry(1, 2, 0.001);
