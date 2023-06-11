@@ -11,63 +11,90 @@
   <script src="https://unpkg.com/three@0.137.4/examples/js/controls/OrbitControls.js"></script>
 </head>
 <body>
- <script>// 必要な変数を定義します
-var containerCount = 52; // 箱の数
-var radius = 10; // 円の半径
-var sceneWidth = window.innerWidth; // ウィンドウの幅
-var sceneHeight = window.innerHeight; // ウィンドウの高さ
+ <script>
 
-// レンダラーを作成します
-var renderer = new THREE.WebGLRenderer();
-renderer.setSize(sceneWidth, sceneHeight);
-document.body.appendChild(renderer.domElement);
+  //ページの読み込みを待つ
+  window.addEventListener('DOMContentLoaded', init);
+  //配列を作成し、1から52までの数値を代入
+  var deck = [];
+  for (var i = 1; i <= 52; i++) {
+    deck.push(i);
+  }
 
-// シーンを作成します
-var scene = new THREE.Scene();
+  //配列のシャッフル
+  for (var i = deck.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = deck[i];
+    deck[i] = deck[j];
+    deck[j] = temp;
+  }
+  function init (){
+    var width=800,
+    height=600;
+    var containerCount = 52; // 箱の数
+    var radius = 10; // 円の半径
+    
 
-// カメラを作成します
-var camera = new THREE.PerspectiveCamera(75, sceneWidth / sceneHeight, 0.1, 1000);
-camera.position.z = 30;
+    //レンダラーの作成
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(width, height);
+    document.body.appendChild(renderer.domElement);
 
-const controls = new THREE.OrbitControls(camera, document.body);
-// オブジェクトを作成します
-var geometry = new THREE.BoxGeometry(1, 2, 0.001);
-var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    //シーンの作成
+    var scene = new THREE.Scene();
 
-// グループを作成します
-var group = new THREE.Group();
+    //カメラの作成
+    var camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    camera.position.z = 30;
 
-// オブジェクトをグループに追加します
-for (var i = 0; i < containerCount; i++) {
-    var angle = (i / containerCount) * Math.PI * 2; // 円周上の角度を計算します
+    const controls = new THREE.OrbitControls(camera, document.body);
+    //カードの作成
+    var geometry = new THREE.BoxGeometry(1, 2, 0.001);
 
-    var z = Math.cos(angle) * radius; // X座標を計算します
-    var x = Math.sin(angle) * radius; // Y座標を計算します
+    //グループを作成
+    var group = new THREE.Group();
 
-    var cube = new THREE.Mesh(geometry, material); // オブジェクトを作成します
-    cube.position.z = z; // X座標を設定します
-    cube.position.x = x; // Y座標を設定します
+    //カードをグループに追加
+    for (var i = 0; i < containerCount; i++) {
+      var angle = (i / containerCount) * Math.PI * 2; 
+      var z = Math.cos(angle) * radius; 
+      var x = Math.sin(angle) * radius; 
+      var card = new THREE.Mesh(geometry, material); 
+      card.position.z = z; //z座標を設定
+      card.position.x = x; //x座標を設定
 
-    group.add(cube); // グループにオブジェクトを追加します
-}
+      var materials = [
+                new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
+                new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
+                new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
+                new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
+                new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/"+deck[i]+".png")}),
+                new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/c1.png")}),
+            ];
+            var material = new THREE.MeshFaceMaterial(materials); //マテリアルをセット
 
-// グループをシーンに追加します
-scene.add(group);
+      group.add(card); //グループにオブジェクトを追加
+    }
 
-// アニメーションループを作成します
-function animate() {
-    requestAnimationFrame(animate);
+    //グループをシーンに追加
+    scene.add(group);
 
-    // グループを回転させます
-    //group.rotation.x += 0.01;
-    //group.rotation.y += 0.01;
-    group.rotation.y+=0.001;
+   
+    function animate() {
+      requestAnimationFrame(animate);
 
-    renderer.render(scene, camera);
-}
+      // グループを回転
+      //group.rotation.x += 0.01;
+      group.rotation.y+=0.001;
 
-// アニメーションを開始します
-animate();
+      renderer.render(scene, camera);
+    }
+
+    //アニメーションを開始
+    animate();
+
+ 
+  }
 </script>
 </body>
 </html>
