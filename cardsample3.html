@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>fusample</title> 
+  <title>cardsample3</title> 
 
   <!-- three.jsを読み込む(ローカル) -->
   <!-- <script src="./three.js"></script> -->
@@ -24,6 +24,9 @@
         var renderer = new THREE.WebGLRenderer();
         document.body.appendChild(renderer.domElement);
         renderer.setSize(width, height);
+      
+      // シーンを作成
+        const scene = new THREE.Scene();
 
         // カメラを作成
         const camera = new THREE.PerspectiveCamera(75, width / height);
@@ -51,8 +54,7 @@
         scene.add(axisHelper);
 
 
-        // シーンを作成
-        const scene = new THREE.Scene();
+        
 
         // 配列を作成し、1から52までの数値を代入します
         var deck = [];
