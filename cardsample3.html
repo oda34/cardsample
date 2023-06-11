@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>fusample</title> 
+
+  <!-- three.jsを読み込む(ローカル) -->
+  <!-- <script src="./three.js"></script> -->
+  <!-- three.jsを読み込む(CDN) -->
+  <script src="https://unpkg.com/three@0.137.4/build/three.min.js"></script>
+  <script src="https://unpkg.com/three@0.137.4/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+ <script>
+    // ページの読み込みを待つ
+    window.addEventListener('DOMContentLoaded', init);
+
+    function init() {
+        // サイズを指定
+        const width = 800
+        const height = 600;
+
+        // レンダラーを作成
+        var renderer = new THREE.WebGLRenderer();
+        document.body.appendChild(renderer.domElement);
+        renderer.setSize(width, height);
+
+        // カメラを作成
+        const camera = new THREE.PerspectiveCamera(75, width / height);
+        // カメラの初期座標を設定
+        camera.position.set(0, 0, 30);
+
+        // カメラコントローラーを作成
+        const controls = new THREE.OrbitControls(camera, document.body); 
+
+        // 平行光源1
+        var directionalLight1 = new THREE.DirectionalLight(0xffffff);
+        directionalLight1.position.set(10, 10, 10);
+        // シーンに追加
+        scene.add(directionalLight1);
+        // 平行光源2
+        var directionalLight2 = new THREE.DirectionalLight(0x888888);
+        directionalLight2.position.set(-10, -10, 10);
+        // シーンに追加
+        scene.add(directionalLight2);
+
+        // helper
+        const gridHelper = new THREE.GridHelper(2,10); // size, step
+        scene.add(gridHelper);
+        const axisHelper = new THREE.AxisHelper(2); //軸の長さ　X：赤、Y：緑、z：青
+        scene.add(axisHelper);
+
+
+        // シーンを作成
+        const scene = new THREE.Scene();
+
+        // 配列を作成し、1から52までの数値を代入します
+        var deck = [];
+        for (var i = 1; i <= 52; i++) {
+            array.push(i);
+        }
+
+        // 配列をシャッフルします
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = deck[i];
+            deck[i] = deck[j];
+            deck[j] = temp;
+        }
+
+        // 必要な変数を定義します
+        var cardCount = 52; // カードの枚数
+        var radius = 10; // 円の半径
+        // カードを作成します
+        var geometry = new THREE.BoxGeometry(1, 2, 0.001);
+
+        // グループを作成します
+        var group = new THREE.Group();
+
+        // オブジェクトをグループに追加します
+        for (var i = 0; i < cardCount; i++) {
+            //6面分のテクスチャー読み込み
+            var materials = [
+                new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
+                new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
+                new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
+                new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
+                new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/"+i+".png")}),
+                new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/c1.png")}),
+            ];
+            var material = new THREE.MeshFaceMaterial(materials); // マテリアルをセット
+            var card = new THREE.Mesh(geometry, material);
+ 
+            
+
+            var angle = (i / cardCount) * Math.PI * 2; // 円周上の角度を計算します
+
+            var z = Math.cos(angle) * radius; // X座標を計算します
+            var x = Math.sin(angle) * radius; // Y座標を計算します
+
+            var card = new THREE.Mesh(geometry, material); // オブジェクトを作成します
+            card.position.z = z; // X座標を設定します
+            card.position.x = x; // Y座標を設定します
+
+            group.add(card); // グループにオブジェクトを追加します
+        }
+
+        // グループをシーンに追加します
+        scene.add(group);
+
+        // アニメーションループを作成します
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // グループを回転させます
+            //group.rotation.x += 0.01;
+            //group.rotation.y += 0.01;
+            group.rotation.y+=0.001;
+
+            renderer.render(scene, camera);
+        }
+
+        // アニメーションを開始します
+        animate();
+    }
+</script>
+</body>
+</html>
