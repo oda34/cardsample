@@ -59,20 +59,20 @@
       var angle = (i / containerCount) * Math.PI * 2; 
       var z = Math.cos(angle) * radius; 
       var x = Math.sin(angle) * radius; 
+      var materials = [
+        new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
+        new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
+        new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
+        new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
+        new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/"+deck[i]+".png")}),
+        new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/c1.png")}),
+      ];
+      var material = new THREE.MeshFaceMaterial(materials); //マテリアルをセット
       var card = new THREE.Mesh(geometry, material); 
       card.position.z = z; //z座標を設定
       card.position.x = x; //x座標を設定
 
-      var materials = [
-                new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
-                new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
-                new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
-                new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
-                new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/"+deck[i]+".png")}),
-                new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/c1.png")}),
-            ];
-            var material = new THREE.MeshFaceMaterial(materials); //マテリアルをセット
-
+      
       group.add(card); //グループにオブジェクトを追加
     }
 
