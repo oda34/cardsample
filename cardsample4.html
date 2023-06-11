@@ -51,6 +51,9 @@
       var light = new THREE.PointLight(0xffffff);
       light.position.set(0, 0, 20); //光源の位置を設定
       scene.add(light);
+      var light2 = new THREE.PointLight(0xffffff);
+      light2.position.set(0, 0, -20); //光源の位置を設定
+      scene.add(light2);
 
       //カードの作成
       var geometry = new THREE.BoxGeometry(1, 2, 0.001);
