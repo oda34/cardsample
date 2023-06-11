@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>cardsample5</title> 
+  <title>cardsample4</title> 
 
   <!-- three.jsを読み込む(CDN) -->
   <script src="https://unpkg.com/three@0.137.4/build/three.min.js"></script>
@@ -46,16 +46,28 @@
       camera.position.z = 30;
 
       const controls = new THREE.OrbitControls(camera, renderer.domElement);
+      
+      // 平行光源1
+      var directionalLight1 = new THREE.DirectionalLight(0xffffff);
+      directionalLight1.position.set(10, 10, 10);
+      // シーンに追加
+      scene.add(directionalLight1);
+      // 平行光源2
+      var directionalLight2 = new THREE.DirectionalLight(0x888888);
+      directionalLight2.position.set(-10, -10, 10);
+      // シーンに追加
+      scene.add(directionalLight2);
 
       //カードの作成
       var geometry = new THREE.BoxGeometry(1, 2, 0.001);
-      var materials = [];
-
-      for (var i = 0; i < containerCount; i++) {
-        var texture = new THREE.TextureLoader().load(`cards/cards/${deck[i]}.png`);
-        materials.push(new THREE.MeshLambertMaterial({ map: texture }));
-      }
-
+      var materials = [
+        new THREE.MeshLambertMaterial({ map: new THREE.TextureLoader().load("white.png") }),
+        new THREE.MeshLambertMaterial({ map: new THREE.TextureLoader().load("white.png") }),
+        new THREE.MeshLambertMaterial({ map: new THREE.TextureLoader().load("white.png") }),
+        new THREE.MeshLambertMaterial({ map: new THREE.TextureLoader().load("white.png") }),
+        new THREE.MeshLambertMaterial({ map: new THREE.TextureLoader().load("cards/cards/1.png") }),
+        new THREE.MeshLambertMaterial({ map: new THREE.TextureLoader().load("cards/cards/c1.png") }),
+      ];
       var material = new THREE.MeshFaceMaterial(materials); //マテリアルをセット
       var card = new THREE.Mesh(geometry, material);
 
@@ -81,6 +93,7 @@
         requestAnimationFrame(animate);
 
         // グループを回転
+        //group.rotation.x += 0.01;
         group.rotation.y += 0.001;
 
         renderer.render(scene, camera);
