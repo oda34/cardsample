@@ -13,25 +13,27 @@
     //ページの読み込みを待つ
     window.addEventListener('DOMContentLoaded', init);
 
-    //配列を作成し、1から52までの数値を代入
-    var deck = [];
-    for (var i = 1; i <= 52; i++) {
-      deck.push(i);
-    }
-
-    //配列のシャッフル
-    for (var i = deck.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = deck[i];
-      deck[i] = deck[j];
-      deck[j] = temp;
-    }
+    
 
     function init() {
       var width = 800,
           height = 600;
       var containerCount = 52; // 箱の数
       var radius = 10; // 円の半径
+
+      //配列を作成し、1から52までの数値を代入
+      var deck = [];
+      for (var i = 1; i <= 52; i++) {
+        deck.push(i);
+      }
+
+      //配列のシャッフル
+      for (var i = deck.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = deck[i];
+        deck[i] = deck[j];
+        deck[j] = temp;
+      }
 
       //レンダラーの作成
       var renderer = new THREE.WebGLRenderer();
