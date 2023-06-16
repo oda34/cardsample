@@ -54,12 +54,12 @@
 
         //6面分のテクスチャー読み込み
         var materials = [
-          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
-          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
-          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
-          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
-          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/"+i+".png")}),
-          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/c1.png")}),
+          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")},{transparent: true}),
+          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")},{transparent: true}),
+          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")},{transparent: true}),
+          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")},{transparent: true}),
+          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/"+i+".png")},{transparent: true}),
+          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/c1.png")},{transparent: true}),
         ];
  
         var material = new THREE.MeshFaceMaterial(materials); // マテリアルをセット
