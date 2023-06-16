@@ -58,11 +58,11 @@
           new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
           new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
           new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("white.png")}),
-          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/"+i+".png")}),
-          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/c1.png")}),
+          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/"+i+".png",{transparent: true})}),
+          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/c1.png,{transparent: true}")}),
         ];
  
-        var material = new THREE.MeshFaceMaterial(materials,{transparent: true}); // マテリアルをセット
+        var material = new THREE.MeshFaceMaterial(materials); // マテリアルをセット
 
         // 箱を作成
         var geometry = new THREE.BoxGeometry(1, 2, 0.001);
