@@ -32,43 +32,32 @@
 
     const controls = new THREE.OrbitControls(camera, document.body);
     
-    //テクスチャ読み込み
-    //var textureLoader = new THREE.TextureLoader();  
-    //var texture = textureLoader.load("cards/cards/1.png");
-    //var mat = new THREE.MeshPhongMaterial();
-    //mat.map = texture;
-    
-    //6面分のテクスチャー読み込み
-    var materials = [
-      new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/1.png")}),
-      new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/14.png")}),
-      new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/27.png")}),
-      new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/40.png")}),
-      new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/Thumbs.png")}),
-      new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/c1.png")}),
-     ];
-    var material = new THREE.MeshFaceMaterial(materials); // マテリアルをセット
+    var textureLoader = new THREE.TextureLoader();
 
-    // 平面を作成
-    //var geometry = new THREE.PlaneGeometry( 4, 6, 1 );
-    //var plane = new THREE.Mesh( geometry, mat);
-    //plane.position.set(0,0,0);
-    //scene.add( plane );
-    
-    // 箱を作成
-    var geometry2 = new THREE.BoxGeometry(4, 6, 1);
-    var box = new THREE.Mesh(geometry, material);
-    scene.add(box);
+    // ランダムな番号の生成
+    var i = Math.floor(Math.random() * 52) + 1;
 
+    // トランプのテクスチャを読み込み
+    var cardTexture = textureLoader.load("cards/cards/" + i + ".png");
+    cardTexture.magFilter = THREE.NearestFilter; // テクスチャの拡大フィルタリングを設定
 
-    // 平面を作成
-    var planeGeometry = new THREE.PlaneGeometry(20,20);
-    //var planeMaterial = new THREE.MeshBasicMaterial({color: 0x00ff00});
-    var planeMaterial = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
-    var plane2 = new THREE.Mesh(planeGeometry,planeMaterial);
-    plane2.rotation.set( -Math.PI/2, 0, 0 );
-    plane2.position.set(0,-1.5,-2);
-    scene.add(plane2);
+    // トランプの裏面のテクスチャを読み込み
+    var backTexture = textureLoader.load("cards/cards/c1.png");
+    backTexture.magFilter = THREE.NearestFilter; // テクスチャの拡大フィルタリングを設定
+
+    // トランプの表面のマテリアルを作成
+    var frontMaterial = new THREE.MeshLambertMaterial({ map: cardTexture, transparent: true });
+
+    // トランプの裏面のマテリアルを作成
+    var backMaterial = new THREE.MeshLambertMaterial({ map: backTexture, transparent: true });
+
+    // トランプのメッシュを作成
+    var geometry = new THREE.BoxGeometry(1, 2, 0.001);
+
+    // トランプの表面と裏面のマテリアルを適用
+    var materials = [backMaterial, frontMaterial, backMaterial, backMaterial, backMaterial, backMaterial];
+    var mesh = new THREE.Mesh(geometry, materials);
+    scene.add(mesh);  
   
     // 平行光源
     var directionalLight = new THREE.DirectionalLight(0xffffff);
@@ -89,7 +78,7 @@
   
       // 箱を回転させる
       //plane.rotation.x += 0.01;
-      plane.rotation.y += 0.01;
+      mesh.rotation.y += 0.01;
 
      
       
