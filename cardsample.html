@@ -41,11 +41,9 @@
 
     // トランプのテクスチャを読み込み
     var cardTexture = textureLoader.load("cards/cards/1.png");
-    //cardTexture.magFilter = THREE.NearestFilter; // テクスチャの拡大フィルタリングを設定
 
     // トランプの裏面のテクスチャを読み込み
     var backTexture = textureLoader.load("cards/cards/c1.png");
-    //backTexture.magFilter = THREE.NearestFilter; // テクスチャの拡大フィルタリングを設定
 
     // トランプの表面のマテリアルを作成
     var frontMaterial = new THREE.MeshLambertMaterial({ map: cardTexture, transparent: true });
