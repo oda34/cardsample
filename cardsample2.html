@@ -62,7 +62,7 @@
           new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("cards/cards/c1.png")}),
         ];
  
-        var material = new THREE.MeshFaceMaterial({transparent: true}); // マテリアルをセット
+        var material = new THREE.MeshFaceMaterial(materials,{transparent: true}); // マテリアルをセット
 
         // 箱を作成
         var geometry = new THREE.BoxGeometry(1, 2, 0.001);
