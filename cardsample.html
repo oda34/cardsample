@@ -57,7 +57,7 @@
     var geometry = new THREE.BoxGeometry(1, 2, 0.001);
 
     // トランプの表面と裏面のマテリアルを適用
-    var materials = [backMaterial, frontMaterial, backMaterial, backMaterial, backMaterial, backMaterial];
+    var materials = [backMaterial, frontMaterial, backMaterial, frontMaterial, backMaterial, frontMaterial];
     var mesh = new THREE.Mesh(geometry, materials);
     scene.add(mesh);  
   
